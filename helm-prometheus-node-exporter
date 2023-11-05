@@ -1,0 +1,14 @@
+Prometheus:
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+Namespace:
+kubectl create namespace prometheus-node-exporter
+  
+NodeExporter:
+helm install prometheus-node-exporter prometheus-community/prometheus-node-exporter --namespace prometheus-node-exporter
+
+Update the prometheus.yml:
+  - job_name: 'utube'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['node1Ip:9100']
